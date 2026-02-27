@@ -1,0 +1,558 @@
+/* ═══════════════════════════════════════════════════
+   PredictionForm – Original form styles preserved,
+   Result card completely redesigned.
+═══════════════════════════════════════════════════ */
+
+/* ── Outer Card ── */
+.prediction-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    margin: 2rem auto 5rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 860px;
+}
+
+/* ── Page Header ── */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ── Content Layout ── */
+.prediction-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* ── Form Container ── */
+.form-container {
+    width: 100%;
+}
+
+/* ── Form Sections ── */
+.form-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.form-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+}
+
+.form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.form-group input {
+    padding: 0.7rem 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    outline: none;
+    width: 100%;
+}
+
+.form-group select {
+    padding: 0.7rem 2.25rem 0.7rem 0.9rem;
+    /* extra right padding for arrow */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    /* Custom chevron arrow — white for dark mode */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    /* Tell the OS to render the popup in dark mode */
+    color-scheme: dark;
+}
+
+/* Option elements — dark theme */
+.form-group select option {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+    background-color: rgba(99, 102, 241, 0.06);
+}
+
+[data-theme="light"] .form-group input {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    color: #0f172a;
+}
+
+[data-theme="light"] .form-group select {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    color: #0f172a;
+    /* Grey chevron for light mode */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    color-scheme: light;
+}
+
+/* Option elements — light theme */
+[data-theme="light"] .form-group select option {
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group select:focus {
+    border-color: var(--primary);
+    background-color: #f8fafc;
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.3);
+    transition: var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 28px rgba(var(--primary-rgb), 0.4);
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════════════
+   RESULT CARD — Redesigned
+════════════════════════════════════════════════════ */
+
+.results-container {
+    width: 100%;
+}
+
+.result-card-refined {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Result header bar */
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 1.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.result-header h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.download-btn-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--primary-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.download-btn-mini:hover:not(:disabled) {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.download-btn-mini:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+    .download-btn-mini .btn-text {
+        display: none;
+    }
+
+    .download-btn-mini {
+        padding: 0.5rem;
+        aspect-ratio: 1;
+        justify-content: center;
+    }
+}
+
+/* Inner layout: gauge left, interpretation right */
+.result-content-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    align-items: flex-start;
+    padding: 1.75rem;
+    gap: 2rem;
+}
+
+/* Gauge */
+.gauge-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.risk-gauge-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-center-hud {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.hud-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.hud-value {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-main);
+}
+
+.hud-value .unit {
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.hud-sub {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+}
+
+/* Interpretation */
+.interpretation-section {
+    width: 100%;
+}
+
+/* Diagnostic summary table */
+.diagnostic-summary {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.diagnostic-summary h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 1rem;
+}
+
+.data-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.data-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.84rem;
+}
+
+.data-row.highlight {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.data-row .label {
+    color: var(--text-muted);
+}
+
+.data-row .value {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.data-row .status {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 99px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    text-align: center;
+}
+
+/* Narrative */
+.report-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* Doctor alert */
+.doctor-alert {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: rgba(239, 68, 68, 0.07);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 12px;
+    color: #ef4444;
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-alert strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #ef4444;
+}
+
+.doctor-alert p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.83rem;
+    line-height: 1.5;
+}
+
+/* Lifestyle suggestions */
+.lifestyle-suggestions {
+    padding: 1.25rem 1.75rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lifestyle-suggestions h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 1rem;
+}
+
+.suggestions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.suggestion-icon {
+    color: var(--primary);
+    font-size: 0.95rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.suggestion-item p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ── Light theme overrides ── */
+[data-theme="light"] .prediction-card,
+[data-theme="light"] .result-card-refined {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="light"] .form-section {
+    background: rgba(248, 250, 252, 0.8);
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .diagnostic-summary {
+    background: rgba(248, 250, 252, 0.9);
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .suggestion-item {
+    background: rgba(248, 250, 252, 0.8);
+    border-color: #e2e8f0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .prediction-card {
+        padding: 1.75rem 1.25rem;
+        border-radius: 20px;
+    }
+
+    .form-group-row {
+        grid-template-columns: 1fr;
+    }
+
+    .suggestions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-content-grid {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+    }
+
+    .gauge-section {
+        width: 100%;
+    }
+}

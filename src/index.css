@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* --- Cute & Beautiful Theme (Softer, Pastel Medical Aesthetic) --- */
+
+    /* Colors - Softer, friendlier Palette */
+    --primary: #818cf8;
+    /* Soft Indigo */
+    --primary-rgb: 129, 140, 248;
+    --primary-light: #a5b4fc;
+    --primary-dark: #6366f1;
+
+    --secondary: #60a5fa;
+    /* Soft Blue */
+    --accent: #f472b6;
+    /* Soft Pink/Rose */
+    --accent-2: #fb7185;
+    /* Soft Cherry */
+    --accent-3: #a78bfa;
+    /* Soft Purple */
+    --success: #34d399;
+    /* Soft Mint/Green */
+    --warning: #fbbf24;
+    /* Soft Amber */
+    --danger: #fda4af;
+    /* Soft Rose/Pink */
+
+    /* Backgrounds */
+    --bg-body: #0a0b1e;
+    /* Deep but slightly softer blue-black */
+    --bg-surface: #13142d;
+    --bg-card: rgba(19, 20, 45, 0.65);
+
+    /* Typography */
+    --text-main: #f1f5f9;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+
+    /* Glassmorphism - Softer & Rounder */
+    --glass-bg: rgba(25, 26, 60, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(20px);
+    --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.25);
+
+    /* Gradients - Playful & Soft */
+    --gradient-primary: linear-gradient(135deg, #818cf8 0%, #f472b6 100%);
+    --gradient-mesh:
+        radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(167, 139, 250, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(244, 114, 182, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(96, 165, 250, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(251, 113, 133, 0.1) 0px, transparent 50%);
+
+    /* Shadows - More diffused */
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 0 30px rgba(129, 140, 248, 0.15);
+
+    /* UI Defaults - Super rounded for "cute" look */
+    --radius-sm: 0.75rem;
+    --radius-md: 1.25rem;
+    --radius-lg: 2rem;
+    --radius-xl: 3rem;
+    --radius-full: 9999px;
+
+    --transition-fast: 200ms ease;
+    --transition-base: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 700ms cubic-bezier(0.19, 1, 0.22, 1);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-elevated: #1a1b3a;
+}
+
+[data-theme="light"] {
+    --primary-rgb: 99, 102, 241;
+    --bg-body: #f1f5f9;
+    --bg-surface: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --text-main: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(99, 102, 241, 0.1);
+    --bg-elevated: #f8fafc;
+    --border-color: #e2e8f0;
+    --gradient-mesh:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(217, 70, 239, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 50%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+}
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Subtle Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-mesh);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+    z-index: -2;
+    opacity: 0.6;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* ────── Cute & Beautiful Utilities ────── */
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    transition: var(--transition-base), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.glass-panel:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-8px) scale(1.01);
+}
+
+.text-gradient-pastel {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Premium Cyber-Medical Bio-Network Background ── */
+.bg-grid-mesh {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+    background-size: 40px 40px;
+    z-index: -1;
+}
+
+.bg-grid-mesh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(25, 26, 60, 0) 0%, rgba(25, 26, 60, 0.4) 50%, rgba(25, 26, 60, 0) 100%);
+    animation: gridScan 8s linear infinite;
+}
+
+@keyframes gridScan {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.bio-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    animation: orbFloat 20s infinite alternate ease-in-out;
+}
+
+.orb-primary {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #818cf8, transparent 70%);
+    top: -10%;
+    left: 20%;
+}
+
+.orb-secondary {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #f472b6, transparent 70%);
+    bottom: 5%;
+    right: 15%;
+    animation-delay: -5s;
+}
+
+.orb-accent {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #60a5fa, transparent 70%);
+    top: 40%;
+    left: -5%;
+    animation-delay: -10s;
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, 40px) scale(1.1);
+    }
+}
+
+/* Scanning Beam */
+.scanning-beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    opacity: 0.1;
+    box-shadow: 0 0 20px var(--primary-light);
+    animation: beamSweep 12s linear infinite;
+}
+
+@keyframes beamSweep {
+    0% {
+        top: -10%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}
+
+/* Bio Particles */
+.bio-particle {
+    position: absolute;
+    color: var(--primary-light);
+    filter: drop-shadow(0 0 8px currentColor);
+    animation: floatParticle 15s infinite linear;
+    z-index: 0;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.3;
+    }
+
+    90% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-300px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.bio-cell {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    position: relative;
+    opacity: 0.5;
+}
+
+.bio-pulse {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: currentColor;
+    animation: bioPulseEffect 2s infinite ease-out;
+}
+
+@keyframes bioPulseEffect {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Starfield */
+.starfield {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 20px 30px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1.5px 1.5px at 50px 160px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1.5px 1.5px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 160px 120px, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.05;
+    animation: twinkleStar 4s infinite alternate;
+}
+
+@keyframes twinkleStar {
+    0% {
+        opacity: 0.03;
+    }
+
+    100% {
+        opacity: 0.08;
+    }
+}
+
+.cute-btn {
+    border-radius: var(--radius-full);
+    padding: 0.8rem 1.8rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.cute-btn:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+/* ── Custom Scrollbar (Cute version) ── */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary-light), var(--accent));
+    border-radius: 10px;
+    border: 3px solid var(--bg-body);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary-light), var(--accent));
+    background-clip: padding-box;
+}
+
+/* Utilities */
+.text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 3s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradientFlow {
+
+    0%,
+    100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+}
+
+/* Enhanced Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-smooth);
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: var(--shadow-neon);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    transform: translateX(100%);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.7), 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 2px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+/* Enhanced Glass Panel */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-smooth);
+    position: relative;
+    padding: 2.5rem;
+}
+
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.glass-panel:hover::before {
+    opacity: 1;
+}
+
+.glass-panel:hover {
+    border-color: var(--primary);
+    box-shadow:
+        0 10px 40px -10px rgba(99, 102, 241, 0.4),
+        0 0 0 1px rgba(99, 102, 241, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-6px);
+}
+
+/* Floating Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Glow Effect */
+.glow {
+    position: relative;
+}
+
+.glow::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    opacity: 0;
+    z-index: -1;
+    filter: blur(20px);
+    transition: opacity var(--transition-base);
+}
+
+/* --- Glossy Neon Bubble System (Reference: Android Phase Beam style) --- */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 40px,
+            rgba(255, 255, 255, 0.012) 41px,
+            transparent 42px);
+    pointer-events: none;
+    z-index: -2;
+}
+
+@keyframes bubbleFloat {
+    0% {
+        transform: translate(0, 100vh) scale(0.6);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(80px, -110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.bubble-particle {
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform, opacity;
+    /* Rich Gradient Glow Effect */
+    background: radial-gradient(circle at 35% 35%,
+            white 0%,
+            hsla(var(--hue, 260), 100%, 80%, 0.9) 20%,
+            hsla(var(--hue, 260), 80%, 60%, 0.5) 60%,
+            transparent 100%);
+    box-shadow:
+        0 0 15px hsla(var(--hue, 260), 80%, 60%, 0.4),
+        inset 0 0 8px hsla(var(--hue, 260), 100%, 90%, 0.3);
+    border: 1px solid hsla(var(--hue, 260), 100%, 90%, 0.2);
+    backdrop-filter: blur(1px);
+}
+
+[data-theme="light"] .bubble-particle {
+    opacity: 0.6 !important;
+    box-shadow: 0 0 10px hsla(var(--hue, 260), 80%, 60%, 0.3);
+}
