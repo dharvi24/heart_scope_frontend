@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { predictCardio } from "../services/api";
+import { predictCardio, checkBackendHealth } from "../services/api";
 import { FaUserMd, FaHeartbeat, FaRunning, FaArrowRight, FaExclamationTriangle, FaCheckCircle, FaNotesMedical, FaStethoscope, FaDownload } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
@@ -23,6 +23,7 @@ const PredictionForm = () => {
 
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isWakingUp, setIsWakingUp] = useState(false);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -37,6 +38,7 @@ const PredictionForm = () => {
     setError(null);
     setResult(null);
 
+    // UX: Quick scroll for mobile
     setTimeout(() => {
       const resultElement = document.getElementById("results-section");
       if (resultElement && window.innerWidth < 1024) {
@@ -45,9 +47,16 @@ const PredictionForm = () => {
     }, 500);
 
     try {
+      // Step 1: Poke the backend to wake it up (Render Free Tier can be slow)
+      setIsWakingUp(true);
+      await checkBackendHealth();
+      setIsWakingUp(false);
+
+      // Step 2: Proceed with prediction
       const data = await predictCardio(formData);
       setResult(data);
     } catch (err) {
+      setIsWakingUp(false);
       if (err.message === "CONNECTION_ERROR") {
         setError("backend_connection");
       } else {
@@ -127,7 +136,7 @@ const PredictionForm = () => {
                     >
                       <FaHeartbeat />
                     </motion.div>
-                    Calculating Risk...
+                    {isWakingUp ? "Waking up server..." : "Calculating Risk..."}
                   </div>
                 ) : (
                   <>
