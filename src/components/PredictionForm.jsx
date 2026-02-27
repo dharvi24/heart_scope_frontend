@@ -86,12 +86,12 @@ const PredictionForm = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-sections">
                 <FormSection title="Patient Demographics" icon={<FaUserMd />}>
-                  <Input name="age" label="Age (years)" value={formData.age} onChange={handleChange} min="30" max="100" />
+                  <Input name="age" label="Age (years)" value={formData.age} onChange={handleChange} min="1" max="100" />
                   <Select name="gender" label="Gender" value={formData.gender} onChange={handleChange} options={[
                     { v: 1, l: "Female" }, { v: 2, l: "Male" }
                   ]} />
-                  <Input name="height" label="Height (cm)" value={formData.height} onChange={handleChange} min="50" max="250" />
-                  <Input name="weight" label="Weight (kg)" value={formData.weight} onChange={handleChange} min="30" max="300" />
+                  <Input name="height" label="Height (cm)" value={formData.height} onChange={handleChange} min="1" max="250" />
+                  <Input name="weight" label="Weight (kg)" value={formData.weight} onChange={handleChange} min="1" max="300" />
                 </FormSection>
 
                 <FormSection title="Clinical Vitals" icon={<FaHeartbeat />}>
