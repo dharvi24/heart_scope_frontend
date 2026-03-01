@@ -12,24 +12,28 @@ const apiClient = axios.create({
   },
 });
 
+const handleApiError = (error) => {
+  if (error.code === 'ECONNABORTED') {
+    return "Server is waking up... please wait 30–60 seconds.";
+  }
+  if (error.response) {
+    // Server responded with error status
+    return error.response.data?.detail || error.response.data?.message || `Server error: ${error.response.status}`;
+  } else if (error.request) {
+    // Request was made but no response received
+    return "Server is waking up... please wait 30–60 seconds.";
+  } else {
+    // Something else happened
+    return error.message || "An unexpected error occurred";
+  }
+};
+
 export const predictCardio = async (data) => {
   try {
     const res = await apiClient.post("/predict", data);
     return res.data;
   } catch (error) {
-    if (error.code === 'ECONNABORTED') {
-      throw new Error("Request timeout - Backend is taking too long to respond");
-    }
-    if (error.response) {
-      // Server responded with error status
-      throw new Error(error.response.data?.detail || error.response.data?.message || `Server error: ${error.response.status}`);
-    } else if (error.request) {
-      // Request was made but no response received
-      throw new Error("CONNECTION_ERROR");
-    } else {
-      // Something else happened
-      throw new Error(error.message || "An unexpected error occurred");
-    }
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -39,6 +43,6 @@ export const checkBackendHealth = async () => {
     const res = await apiClient.get("/");
     return { status: "ok", data: res.data };
   } catch (error) {
-    return { status: "error", message: error.message };
+    return { status: "error", message: handleApiError(error) };
   }
 };

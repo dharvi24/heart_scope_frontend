@@ -57,11 +57,7 @@ const PredictionForm = () => {
       setResult(data);
     } catch (err) {
       setIsWakingUp(false);
-      if (err.message === "CONNECTION_ERROR") {
-        setError("backend_connection");
-      } else {
-        setError(err.message);
-      }
+      setError(err.message);
     }
     setLoading(false);
   };
